@@ -10,12 +10,16 @@ const app = express();
 const MONGO_URI =
   'mongodb+srv://piyush_21:piyuspandey021@cluster0.0zr8c.mongodb.net/graphql-basics?retryWrites=true&w=majority';
 if (!MONGO_URI) {
-  throw new Error('You must provide a MongoLab URI');
+  throw new Error('You must provide a MongoDB URI');
 }
 
-mongoose.connect(MONGO_URI);
+mongoose.Promise = global.Promise;
+mongoose.connect(MONGO_URI, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
 mongoose.connection
-  .once('open', () => console.log('Connected to MongoLab instance.'))
+  .once('open', () => console.log('Connected to MongoDB.'))
   .on('error', (error) => console.log('Error connecting to MongoLab:', error));
 
 app.use(bodyParser.json());
