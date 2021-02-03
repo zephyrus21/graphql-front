@@ -7,15 +7,23 @@ import fetchSongs from '../queries/fetchSongs';
 
 class SongList extends Component {
   onSongDelete(id) {
-    this.props.mutate({
-      variables: { id },
-      refetchQueries: [{ query: fetchSongs }],
-    });
+    this.props
+      .mutate({
+        variables: { id },
+      })
+      .then(() => this.props.data.refetch());
   }
 
   renderSongs() {
     return this.props.data.songs.map((song) => (
-      <li className="collection-item" key={song.id}>
+      <li
+        className="collection-item"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+        key={song.id}
+      >
         {song.title}
         <i
           className="material-icons"
