@@ -24,7 +24,7 @@ class SongList extends Component {
         }}
         key={song.id}
       >
-        {song.title}
+        <Link to={`/songs/${song.id}`}>{song.title}</Link>
         <i
           className="material-icons"
           onClick={() => this.onSongDelete(song.id)}
@@ -36,7 +36,6 @@ class SongList extends Component {
   }
 
   render() {
-    console.log(this.props.data.songs);
     if (this.props.data.loading) return <div>Loading...</div>;
     else
       return (
